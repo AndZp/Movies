@@ -1,0 +1,93 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "oleynik.andrey.imbdmovies"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "0.0.1"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    configurations {
+        all*.exclude group: 'com.google.guava', module: 'listenablefuture'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.core:core-ktx:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:" + kotlinVersion
+    implementation 'com.google.android.material:material:1.0.0'
+
+
+    // support
+    implementation 'androidx.appcompat:appcompat:' + mySupportVersion
+    implementation 'androidx.constraintlayout:constraintlayout:' + constraintlayoutVersion
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+
+    // support
+    implementation 'androidx.appcompat:appcompat:' + mySupportVersion
+    implementation 'androidx.constraintlayout:constraintlayout:' + constraintlayoutVersion
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+
+    //logs
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    implementation "com.gojuno.koptional:koptional:$koptionalVersion"
+    implementation "com.gojuno.koptional:koptional-rxjava2-extensions:$koptionalVersion"
+
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+
+       // Koin for Android (DI)
+    def koin_version = '2.0.1'
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    implementation "org.koin:koin-java:$koin_version"
+
+    //Rx
+    implementation 'io.reactivex.rxjava2:rxjava:' + rxJavaVersion
+    implementation 'io.reactivex.rxjava2:rxkotlin:' + rxKotlinVersion
+    implementation 'io.reactivex.rxjava2:rxandroid:' + rxAndroidVersion
+    implementation 'nl.littlerobots.rxlint:rxlint:1.7.4'
+
+    //Room
+    def room_version = "2.1.0-rc01"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
+    implementation "androidx.room:room-ktx:$room_version" // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-rxjava2:$room_version"
+
+    //
+    def GLIDE_VERSION = "4.8.0"
+    implementation "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
+    kapt "com.github.bumptech.glide:compiler:${GLIDE_VERSION}"
+}
